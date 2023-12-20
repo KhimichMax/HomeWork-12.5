@@ -3,16 +3,17 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private Transform playerTransform;
+    [SerializeField] private GameObject _camera;
 
     private Vector3 offset;
 
     private void Start()
     {
-        offset = transform.position - playerTransform.position;
+        offset = _camera.transform.position - playerTransform.position;
     }
 
     private void FixedUpdate()
-    {
-        transform.position = playerTransform.position + offset;
+    { 
+        _camera.transform.position = playerTransform.position + offset;   
     }
 }
