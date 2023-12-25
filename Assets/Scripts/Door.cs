@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using WildBoll.Inputs;
 
@@ -22,9 +18,9 @@ public class Door : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision _boxCollider)
+    private void OnTriggerStay(Collider other)
     {
-        if (_boxCollider.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             if (Input.GetButtonDown(GlobalStringVars.JUMP_AXES))
             {
