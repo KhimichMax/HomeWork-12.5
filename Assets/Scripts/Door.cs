@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 using WildBoll.Inputs;
 
 public class Door : MonoBehaviour
 {
     [SerializeField] private Animator _anim;
+    public GameObject _obj;
+    
     private bool isOpen;
     private void Awake()
     {
@@ -22,10 +25,11 @@ public class Door : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            _obj.GetComponent<CanvasGroup>().alpha += Time.deltaTime / 2;
+            
             if (Input.GetButtonDown(GlobalStringVars.JUMP_AXES))
             {
                 isOpen = !isOpen;
-                Debug.Log(isOpen);
                 if (isOpen)
                 {
                     _anim.SetBool("open", true);
@@ -37,4 +41,13 @@ public class Door : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            _obj.GetComponent<CanvasGroup>().alpha = 0;
+        }
+    }
+    
 }
